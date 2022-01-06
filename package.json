@@ -1,0 +1,45 @@
+{
+	"name": "animescraper-ui-v2",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "svelte-kit dev",
+		"build": "svelte-kit build",
+		"package": "svelte-kit package",
+		"preview": "svelte-kit preview",
+		"check": "svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
+		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. .",
+		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-auto": "next",
+		"@sveltejs/adapter-netlify": "^1.0.0-next.37",
+		"@sveltejs/kit": "next",
+		"autoprefixer": "^10.3.7",
+		"cssnano": "^5.0.8",
+		"nprogress": "^0.2.0",
+		"postcss": "^8.3.9",
+		"postcss-load-config": "^3.1.0",
+		"prettier": "^2.4.1",
+		"prettier-plugin-svelte": "^2.4.0",
+		"svelte": "^3.44.0",
+		"svelte-check": "^2.2.6",
+		"svelte-fa": "^2.4.0",
+		"svelte-preprocess": "^4.9.8",
+		"svelte-simple-modal": "^1.2.0",
+		"svelte-swipe": "^1.8.2",
+		"swiper": "^7.4.1",
+		"tailwindcss": "next",
+		"tslib": "^2.3.1",
+		"typescript": "^4.4.3"
+	},
+	"type": "module",
+	"dependencies": {
+		"@fortawesome/free-solid-svg-icons": "^5.15.4",
+		"axios": "^0.24.0",
+		"cheerio": "^1.0.0-rc.10",
+		"dotenv": "^10.0.0",
+		"ioredis": "^4.28.2",
+		"p-throttle": "^5.0.0"
+	}
+}
