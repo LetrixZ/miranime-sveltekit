@@ -1,5 +1,5 @@
+import Data, { getSavedItem } from "$lib/Data"
 import cheerio from "cheerio"
-import Data from "$lib/Data"
 import type Anime from "$lib/models/Anime"
 // import redis from "$lib/redis"
 export async function get() {
@@ -9,17 +9,19 @@ export async function get() {
     const res = await fetch('https://jkanime.net/')
     if (res.ok) {
       const $ = cheerio.load(await res.text())
+
       const recent_episodes = $('.maximoaltura > a.bloqq').toArray().map((el) => {
         const $el = $(el);
         const it = {
           slug: $el.attr('href').split('/')[3],
           episode: parseInt($el.attr('href').split('/')[4]),
         }
-        const saved: Anime = Data.getSavedItem(it.slug)
+        const saved: Anime = getSavedItem(it.slug)
         if (saved) {
-          if ((saved.type == 'OVA' || saved.type == 'MOVIE' || saved.type == 'SPECIAL') && saved.uploadedEpisodes == 1) saved.episode = 1
-          else saved.episode = it.episode
-          return saved
+          const item = { ...saved }
+          if ((item.type == 'OVA' || item.type == 'MOVIE' || item.type == 'SPECIAL') && item.uploadedEpisodes == 1) item.episode = 1
+          else item.episode = it.episode
+          return item
         }
       }).filter(it => it != null)
 
@@ -28,9 +30,10 @@ export async function get() {
         const it = {
           slug: $el.find('a').attr('href').split('/')[3],
         }
-        const saved: Anime = Data.getSavedItem(it.slug)
+        const saved: Anime = getSavedItem(it.slug)
         if (saved) {
-          return saved
+          const item = { ...saved }
+          return item
         }
       }).filter(it => it != null)
 

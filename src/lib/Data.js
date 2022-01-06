@@ -1,14 +1,13 @@
-import fs from 'fs'
+// const file = fs.readFileSync("$lib/resources/join_new.json")
+// const data = JSON.parse(file.toString())
 
-const file = fs.readFileSync("resources/join_new.json")
-const data = JSON.parse(file.toString())
+// const file2 = fs.readFileSync("$lib/resources/items.json")
+// const data2 = JSON.parse(file2.toString())
+import Data from '$lib/content/data.json'
 
-const file2 = fs.readFileSync("resources/items.json")
-const data2 = JSON.parse(file2.toString())
-
-function save(slug, item) {
-  const file = fs.readFileSync("resources/saved.json")
-  const data = JSON.parse(file.toString())
+async function save(slug, item) {
+  const res = await fetch("/assets/resources/join_new.json")
+  const data = await res.json()
   const filter = data.filter(it => it.slug == slug)
   if (filter.length > 0) {
     const it = filter[0]
@@ -18,11 +17,11 @@ function save(slug, item) {
     const index = data.indexOf(it)
     data[index] = it
   } else data.push(item)
-  fs.writeFileSync("resources/saved.json", JSON.stringify(data))
+  // fs.writeFileSync("$lib/resources/saved.json", JSON.stringify(data))
 }
 
 function get(slug) {
-  const file = fs.readFileSync("resources/saved.json")
+  const file = fs.readFileSync("$lib/resources/saved.json")
   const data = JSON.parse(file.toString())
   const filter = data.filter(it => it.slug == slug)
   if (filter.length > 0) {
@@ -31,7 +30,7 @@ function get(slug) {
 }
 
 function saved() {
-  const file = fs.readFileSync("resources/saved.json")
+  const file = fs.readFileSync("$lib/resources/saved.json")
   const data = JSON.parse(file.toString())
   return data
 }
@@ -48,24 +47,18 @@ function getMAL(slug) {
 
 function getStats() {
   const total = data.length
-  const saved = JSON.parse(fs.readFileSync("resources/saved.json").toString())
+  const saved = JSON.parse(fs.readFileSync("$lib/resources/saved.json").toString())
   const matched = saved.length
   return { total, matched, remaining: total - matched }
 }
 
 const getAllSaved = () => {
-  const data = JSON.parse(fs.readFileSync("resources/data.json").toString())
-  return data
+  // const res = await fetch('assets/resources/data.json')
+  // const data = await res.json()
+  return Data
 }
 
-const getSavedItem = (slug) => {
-  const data = JSON.parse(fs.readFileSync("resources/data.json").toString())
-  let item = data.filter(it => it.slug === slug)?.[0]
-  if (item) {
-    return item
-  } else {
-    return null
-  }
-}
+export const getSavedItem = (slug) => Data.filter(it => it.slug === slug)?.[0]
 
-export default { items: data, save, get, saved, getMAL, getStats, getAllSaved, getSavedItem }
+// export default { items: 'data', save, get, saved, getMAL, getStats, getAllSaved, getSavedItem }
+export default Data
