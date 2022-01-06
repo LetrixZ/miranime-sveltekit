@@ -5,5 +5,4 @@ node_modules
 /package
 .env
 .env.*
-/resources/jk/
-/resources/conv/
+/resources/jk/pages
