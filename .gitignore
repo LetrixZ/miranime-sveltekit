@@ -6,3 +6,5 @@ node_modules
 .env
 .env.*
 /resources/jk/pages
+# Local Netlify folder
+.netlify

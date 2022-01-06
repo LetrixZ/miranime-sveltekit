@@ -1,5 +1,5 @@
 <script context="module">
-	export async function load({ page, fetch }) {
+	export async function load({ url, params, fetch }) {
 		const data = await fetch(`/api`);
 		const items = await data.json();
 		const jkRes = await fetch(`/api/jk/home`);

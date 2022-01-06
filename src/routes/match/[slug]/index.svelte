@@ -1,6 +1,6 @@
 <script context="module">
-	export async function load({ page, fetch }) {
-		const data = await fetch(`/api/${page.params.slug}`);
+	export async function load({ url, params, fetch }) {
+		const data = await fetch(`/api/${params.slug}`);
 		const item = await data.json();
 		return {
 			props: {

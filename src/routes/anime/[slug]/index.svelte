@@ -1,6 +1,6 @@
 <script context="module">
-	export async function load({ page, fetch }) {
-		const res = await fetch(`/api/anime/${page.params.slug}`);
+	export async function load({ url, params, fetch }) {
+		const res = await fetch(`/api/anime/${params.slug}`);
 		const item = await res.json();
 		if (res.ok)
 			return {
